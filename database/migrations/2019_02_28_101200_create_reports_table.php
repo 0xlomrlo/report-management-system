@@ -15,6 +15,18 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->text('content');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                        ->references('id')
+                        ->on('users')
+                        ->onDelete('cascade');
+            $table->unsignedInteger('group_id');
+            $table->foreign('group_id')
+                        ->references('id')
+                        ->on('groups')
+                        ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -11,11 +11,22 @@
 |
 */
 
-Route::get('/', function (Request $request) {
-    
-    return view('welcome');
+Route::group(['middleware' => ['web']], function() {
+    Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+    Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
+    Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 });
 
-Auth::routes();
+Route::get('/', function () {
+    return redirect('/reports');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('lang/{lang}', function ($lang) {
+    Session::put('lang', $lang);
+    return redirect()->back();
+});
+
+    
+Route::resource('reports', 'ReportController');
+Route::resource('users', 'UserController');
+
