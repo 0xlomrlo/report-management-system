@@ -14,21 +14,22 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('group_id')->nullable();
             $table->string('name');
             $table->text('content');
-            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')
                         ->references('id')
                         ->on('users')
                         ->onDelete('cascade');
-            $table->unsignedInteger('group_id');
             $table->foreign('group_id')
                         ->references('id')
                         ->on('groups')
                         ->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**

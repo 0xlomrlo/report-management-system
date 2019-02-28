@@ -30,20 +30,20 @@
       @if (Auth::check())
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item {{ request()->is('/reports/*') ? 'active' : '' }}">
-            <a class="nav-link" href="#0">
+          <li class="nav-item {{ request()->is('reports'.'*') ? 'active' : '' }}">
+          <a class="nav-link" href="{{ route('reports.index') }}">
               <i class="material-icons">description</i>
               <p>@lang('layout.reports')</p>
             </a>
           </li>
-          <li class="nav-item {{ request()->is('/users/*') ? 'active' : '' }}">
-            <a class="nav-link" href="./user.html">
+          <li class="nav-item {{ request()->is('users'.'*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('users.index') }}">
               <i class="material-icons">person</i>
               <p>@lang('layout.users_management')</p>
             </a>
           </li>
-          <li class="nav-item {{ request()->is('/groups/*') ? 'active' : '' }}">
-            <a class="nav-link" href="./tables.html">
+          <li class="nav-item {{ request()->is('groups'.'*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('groups.index') }}">
               <i class="material-icons">group_work</i>
               <p>@lang('layout.groups_management')</p>
             </a>

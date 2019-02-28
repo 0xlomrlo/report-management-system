@@ -51,35 +51,18 @@
 
                             <div class="card">
 
+                                @foreach ($reports as $report)
                                 <div class="card-body">
-                                    <h4 class="card-title">Medical documents</h4>
-                                    <div class="card-text"><strong>@lang('layout.group')</strong>: Saudi Arabia
+                                    <h4 class="card-title">{{ $report->name }}</h4>
+                                    <div class="card-text"><strong>@lang('layout.group')</strong>: {{ $report->group }}
                                         <br /><strong>@lang('layout.tags')</strong>: Medical, Technology</div>
-                                    <button type="button" class="btn btn-info btn-rounded">@lang('layout.show')</button>
+                                    <a href="{{ route('reports.show', $report->id) }}" ><button type="button" class="btn btn-outline-primary waves-effect">@lang('layout.show')</button></a>
+
+
                                 </div>
                                 <hr />
-                                <div class="card-body">
-                                    <h4 class="card-title">Test#2</h4>
-                                    <div class="card-text"><strong>@lang('layout.group')</strong>: Saudi Arabia
-                                        <br /><strong>@lang('layout.tags')</strong>: Medical, Technology</div>
-                                    <button type="button" class="btn btn-info btn-rounded">@lang('layout.show')</button>
-                                </div>
-                                <hr />
-                                <div class="card-body">
-                                        <h4 class="card-title">Test#2</h4>
-                                        <div class="card-text"><strong>@lang('layout.group')</strong>: Saudi Arabia
-                                            <br /><strong>@lang('layout.tags')</strong>: Medical, Technology</div>
-                                        <button type="button" class="btn btn-info btn-rounded">@lang('layout.show')</button>
-                                    </div>
-                                    <hr />
-                                    <div class="card-body">
-                                            <h4 class="card-title">Test#2</h4>
-                                            <div class="card-text"><strong>@lang('layout.group')</strong>: Saudi Arabia
-                                                <br /><strong>@lang('layout.tags')</strong>: Medical, Technology</div>
-                                            <button type="button" class="btn btn-info btn-rounded">@lang('layout.show')</button>
-                                        </div>
-                                        <hr />
-            
+                                @endforeach
+
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination pg-blue justify-content-center">
                                         <li class="page-item disabled">
