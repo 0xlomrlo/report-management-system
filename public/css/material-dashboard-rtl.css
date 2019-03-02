@@ -9,6 +9,7 @@
  * http://gonjeshk.ir
  *
  */
+
 html[dir="rtl"] {
   text-align: right;
   direction: rtl;
@@ -18,7 +19,18 @@ html[dir="rtl"] .nav {
   padding-right: 0;
 }
 
-html[dir="rtl"] th {
+html[dir="rtl"] .rtl .float-left {
+  float : left !important;
+  }
+ 
+html[dir="rtl"] .rtl {
+    direction: RTL;
+}
+html[dir*="rtl"] .rtl .float-left {
+    float:left !important;
+}
+
+html[dir*="rtl"] th {
   text-align: right;
 }
 

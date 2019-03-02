@@ -41,11 +41,14 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-info">
-                        <h3 class="card-title">@lang('layout.reports')</h3>
+                        <h3 class="card-title"> @lang('layout.reports')</h3>
+
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body">
                         <div class="container">
+
+
 
 
 
@@ -54,51 +57,59 @@
                                 @foreach ($reports as $report)
                                 <div class="card-body">
                                     <h4 class="card-title">{{ $report->name }}</h4>
-                                    <div class="card-text"><strong>@lang('layout.group')</strong>: {{ $report->group }}
-                                        <br /><strong>@lang('layout.tags')</strong>: Medical, Technology</div>
-                                    <a href="{{ route('reports.show', $report->id) }}" ><button type="button" class="btn btn-outline-primary waves-effect">@lang('layout.show')</button></a>
+                                    <div class="card-text"><strong>@lang('layout.group')</strong>: @if ($report->group)
+                                        {{ $report->group->name }} @endif
 
+
+                                        <br />
+                                        <strong>@lang('layout.tags')</strong>: @foreach ($report->tags as $tag)
+
+                                        <span class="badge badge-secondary">{{ $tag->name }}</span> @endforeach</div>
+                                    @can('View')
+                                        <a href="{{ route('reports.show', $report->id) }}"><button type="button"class="btn btn-outline-primary waves-effect">@lang('layout.show')</button></a>
+                                    @endcan
+                                    @can('Edit')
+                                        <button type="button" class="btn btn-outline-warning waves-effect">@lang('layout.edit')</button>
+                                    @endcan
+                                    @can('Delete')
+                                        <button type="button" class="btn btn-outline-danger waves-effect">@lang('layout.delete')</button>
+                                    @endcan
 
                                 </div>
                                 <hr />
                                 @endforeach
 
+                                @if ($reports->hasPages())
+
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination pg-blue justify-content-center">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">@lang('layout.previous')</span>
+                                        <li class="page-item {{ $reports->onFirstPage() ? 'disabled' : ''}}">
+                                            <a class="page-link"
+                                                href="{{ $reports->previousPageUrl() }}">@lang('layout.previous')</a>
                                         </li>
-                                        <li class="page-item"><a class="page-link">1</a></li>
-                                        <li class="page-item active">
-                                            <span class="page-link">
-                                                2
-                                                <span class="sr-only">(current)</span>
-                                            </span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link">3</a></li>
-                                        <li class="page-item"><a class="page-link">4</a></li>
-                                        <li class="page-item"><a class="page-link">5</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link">@lang('layout.next')</a>
-                                        </li>
+                                        @for ($i = 1; $i <= $reports->lastPage(); $i++)
+                                            @if ($reports->currentPage() == $i)
+                                            <li class="page-item active">
+                                                <a class="page-link" href={{ $reports->url($i) }}>{{ $i }}</a>
+                                            </li>
+
+                                            @else
+                                            <li class="page-item"><a class="page-link"
+                                                    href={{ $reports->url($i) }}>{{ $i }}</a></li>
+                                            @endif
+                                            @endfor
+
+
+                                            <a href="{{ $reports->nextPageUrl() }}">
+                                                <li class="page-item {{ $reports->hasMorePages() ? '' : 'disabled'}}">
+                                                    <a class="page-link"
+                                                        href="{{ $reports->nextPageUrl() }}">@lang('layout.next')</a>
+                                                </li>
+                                            </a>
                                     </ul>
                                 </nav>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                            @endif
 
 
 
@@ -110,7 +121,6 @@
         </div>
     </div>
 </div>
-
 
 
 @endsection

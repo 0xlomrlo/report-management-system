@@ -8,7 +8,7 @@ class Group extends Model
 {
     public $timestamps = false;
     public function report(){
-        return $this->hasMany('App\Report', 'group_id');
+        return $this->hasMany('App\Report');
     }
 
 }

@@ -15,6 +15,7 @@
 
 /*     brand Colors              */
 
+
 .card {
   font-size: .875rem;
 }
@@ -54,13 +55,15 @@ section {
 
 body {
   margin: 0;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  /* font-family: "Roboto", "Helvetica", "Arial", sans-serif; */
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
   text-align: left;
   background-color: #fafafa;
+  /* font-family: 'Cairo', sans-serif; */
+
 }
 
 [tabindex="-1"]:focus {

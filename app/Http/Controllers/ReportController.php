@@ -17,7 +17,8 @@ class ReportController extends Controller
    
     public function index(Request $request)
     {
-        $reports = Report::with(['group'])->get();
+        $reports = Report::with(['group','tags'])->paginate(10);
+
         // dd($reports->first()->group->name);
         return view('report.index', compact('reports'));
     }
@@ -35,7 +36,9 @@ class ReportController extends Controller
 
     public function show($id)
     {
-        return Report::findOrFail($id);
+        $report =  Report::with(['group','tags','user'])->findOrFail($id);
+        // dd($report);
+        return view('report.show', compact('report'));
     }
 
 

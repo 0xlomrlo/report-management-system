@@ -9,7 +9,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header card-header-info">
-                            <h3 class="card-title text-center">@lang('layout.login')</h3>
+                            <h3 class="card-title text-center"><i class="fa fa-lock"></i> @lang('layout.login')</h3>
                             <p class="card-category"></p>
                         </div>
                         <div class="card-body">

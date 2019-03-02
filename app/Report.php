@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 class Report extends Model
 {
-
     protected $guarded = [];
 
     protected static function boot()
@@ -36,6 +35,11 @@ class Report extends Model
     public function group(){
         return $this->belongsTo('App\Group');
     }
+
+    public function tags(){
+        return $this->belongsToMany('App\Tag');
+    }
+
 
 
 }
