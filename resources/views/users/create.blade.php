@@ -65,13 +65,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach (Spatie\Permission\Models\Role::all() as $role)   
                                         <tr>
-                                            <td>Admin</td>
+                                            <td>{{ ucfirst($role->name) }}</td>
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            checked="">
+                                                    <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->id }}">
                                                         <span class="form-check-sign">
                                                             <span class="check"></span>
                                                         </span>
@@ -79,20 +79,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>User</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            checked="">
-                                                        <span class="form-check-sign">
-                                                            <span class="check"></span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -156,6 +143,49 @@
                 </div>
             </div>
 
+
+            <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">vpn_key</i>
+                            </div>
+                            <h4 class="card-title">@lang('layout.permissions')</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="table-wrapper">
+                                    <table class="table table-hover mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    @foreach (Spatie\Permission\Models\Permission::all() as $permission)
+                                            <tr>
+                                                <td>{{ ucfirst($permission->name) }}</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                                                            <span class="form-check-sign">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                    @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
             <button type="submit"
                 class="btn btn-outline-primary   btn-lg btn-block ">@lang('layout.create_user')</button>
         </div>

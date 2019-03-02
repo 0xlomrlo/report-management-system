@@ -19,8 +19,9 @@
                         </h3>
                         <p class="card-category"></p>
                     </div>
+                    <div class="container">
+
                     <div class="card-body">
-                        <div class="container">
 
 
 
@@ -37,6 +38,10 @@
                                                 <a>@lang('layout.user_role')
                                                 </a>
                                             </th>
+                                            <th class="th-lg">
+                                                    <a>@lang('layout.permissions')
+                                                    </a>
+                                                </th>    
                                             <th class="th-lg">
                                                 <a>@lang('layout.created_date')
                                                 </a>
@@ -56,6 +61,15 @@
                                                 @foreach ($user->roles as $role)
                                                 {{ $role->name }}
                                                 @endforeach</td>
+                                                <td>
+                                                @if($user->permissions->count() > 0)
+                                                @foreach ($user->permissions as $permission)
+                                                <span class="badge badge-pill badge-primary">{{ $permission }}</span>
+                                                @endforeach
+                                                @else
+                                                    Null
+                                                @endif
+                                            </td>
                                             <td>@if($user->created_at){{ $user->created_at->format('Y-m-d') }}@endif</td>
                                             <td>
                                                 <a href="{{ $user->id }}" class="text-warning fa-border" title="Edit"><i class="fas fa-user-edit"></i></a>

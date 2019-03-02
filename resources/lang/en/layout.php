@@ -39,6 +39,7 @@ return [
         'actions' => 'Actions',
         'password_validation' => '*Minimum six characters, at least one letter and one number',
         'groups' => 'Groups',
+        'permissions' => 'Permissions',
 
 
         //Roles

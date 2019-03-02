@@ -41,6 +41,8 @@ return [
         'actions' => 'العمليات',
         'password_validation' => 'الحد الادنى ستة أحرف, على الاقل حرف واحد ورقم واحد',
         'groups' => 'المجموعات',
+        'permissions' => 'الصلاحيات',
+
 
         //Roles
         'roles_management' => 'ادارة الادوار',
