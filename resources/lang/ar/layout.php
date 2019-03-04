@@ -42,12 +42,24 @@ return [
         'password_validation' => 'الحد الادنى ستة أحرف, على الاقل حرف واحد ورقم واحد',
         'groups' => 'المجموعات',
         'permissions' => 'الصلاحيات',
+        'update_user' => 'تحديث المستخدم',
 
 
         //Roles
+        'role' => 'الدور',
+        'roles' => 'الادوار', 
         'roles_management' => 'ادارة الادوار',
+        'create_role' => 'إنشاء دور', 
+
+        //Groups
+        'group_name' => 'اسم المجموعة',
+        'create_group' => 'إنشاء مجموعة',
 
 
+        //modal
+        'sure' => 'هل أنت متاكد؟',
+        'confirm_delete' => 'هل انت متاكد من الحذف؟ لايمكن التراجع عن العملية',
+        'close' => 'اغلاق',
 
-
+        
 ];

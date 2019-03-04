@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
-class GroupController extends Controller
+class RoleController extends Controller
 {
     public function index()
     {
-        return view('groups.index');
+        $roles = Role::orderBy('id')->get();
+        return view('roles.index', compact('roles'));
     }
 
     public function create()
@@ -28,7 +30,7 @@ class GroupController extends Controller
 
     public function edit($id)
     {
-        
+
     }
 
     public function update(Request $request, $id)

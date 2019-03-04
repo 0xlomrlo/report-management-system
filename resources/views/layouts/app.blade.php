@@ -41,14 +41,14 @@
         <ul class="nav">
 
 
-
+          @can('create')
             <li class="nav-item active " >
                 <a class="nav-link" href="" style="background-color: coral;">
                   <i class="material-icons">add_box</i>
                   <p> @lang('layout.create_report') </p>
                 </a>
               </li>
-
+          @endcan
 
 
 
@@ -58,6 +58,7 @@
               <p>@lang('layout.reports')</p>
             </a>
           </li>
+          @role('admin')
           <li class="nav-item {{ request()->is('users'.'*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('users.index') }}">
               <i class="material-icons">person</i>
@@ -71,11 +72,12 @@
             </a>
           </li>
           <li class="nav-item {{ request()->is('roles'.'*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('groups.index') }}">
+            <a class="nav-link" href="{{ route('roles.index') }}">
               <i class="material-icons">group</i>
               <p>@lang('layout.roles_management')</p>
             </a>
           </li>
+          @endrole
         </ul>
       </div>
       @endif
@@ -182,13 +184,13 @@
       });
     }, 4000);
   </script>
-
+  
+  <script src="{{ asset('js/modal.js') }}"></script>
   <script src="{{ asset('js/core/jquery.min.js') }}"></script>
   <script src="{{ asset('js/core/popper.min.js') }}"></script>
   <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
   <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
   <script src="{{ asset('js/material-dashboard.js') }}"></script>
-
 </body>
 
 </html>

@@ -37,10 +37,13 @@
                         </div>
                         <hr />
                         <td>
-                            <button type="button" class="btn btn-outline-warning"><i class="fas fa-edit"></i>
+                            <button type="button" class="btn btn-outline-warning btn-round"><i class="fas fa-edit"></i>
                                 @lang('layout.edit')</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i>
-                                @lang('layout.delete')</button>
+
+                                <button href="javascript:;" onclick="deleteData( '{{ route('reports.delete', $report->id) }}' )"
+                                        data-target="#deleteModal" data-toggle="modal" type="button" 
+                                        class="btn btn-outline-danger btn-round"><i class="fas fa-trash-alt"></i> @lang('layout.delete')</button>
+
                         </td>
                     </div>
                 </div>
@@ -50,7 +53,7 @@
                     <div class="card ">
                         <div class="card-body text-center">
                             <h5 class="card-text">file1.xls</h5>
-                            <button class="btn btn-outline-primary"><i class="fas fa-download"></i></button>
+                            <button class="btn btn-round btn-just-icon" style="background-color:#59698d!important;color:#fff;"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
                 </div>
@@ -58,7 +61,7 @@
                     <div class="card ">
                         <div class="card-body text-center">
                             <h5 class="card-text">file2.png</h5>
-                            <button class="btn btn-outline-primary"><i class="fas fa-download"></i></button>
+                            <button class="btn btn-round btn-just-icon" style="background-color:#59698d!important;color:#fff;"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
                 </div>
@@ -66,7 +69,7 @@
                     <div class="card ">
                         <div class="card-body text-center">
                             <h5 class="card-text">file3.pdf</h5>
-                            <button class="btn btn-outline-primary"><i class="fas fa-download"></i></button>
+                            <button class="btn btn-round btn-just-icon" style="background-color:#59698d!important;color:#fff;"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
                 </div>
@@ -74,7 +77,7 @@
                     <div class="card ">
                         <div class="card-body text-center">
                             <h5 class="card-text">file4.docx</h5>
-                            <button class="btn btn-outline-primary"><i class="fas fa-download"></i></button>
+                            <button class="btn btn-round btn-just-icon" style="background-color:#59698d!important;color:#fff;"><i class="fas fa-download"></i></button>
                         </div>
                     </div>
                 </div>
@@ -84,4 +87,5 @@
     </div>
 </div>
 
+@include('modal')
 @endsection

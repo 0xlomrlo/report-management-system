@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -12,21 +13,16 @@ class PermissionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert([
-            'name' => 'Create',
-            'guard_name' => 'web',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'View',
-            'guard_name' => 'web',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Edit',
-            'guard_name' => 'web',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete',
-            'guard_name' => 'web',
-        ]);
+
+        $permissions = [
+            'create',
+            'view',
+            'edit',
+            'delete',
+         ];
+ 
+         foreach ($permissions as $permission) {
+              Permission::create(['name' => $permission, 'guard_name' => 'web']);
+         }
     }
 }

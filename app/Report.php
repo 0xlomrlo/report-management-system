@@ -40,6 +40,8 @@ class Report extends Model
         return $this->belongsToMany('App\Tag');
     }
 
-
+    public function files(){
+        return $this->hasMany('App\ReportFile');
+    }
 
 }

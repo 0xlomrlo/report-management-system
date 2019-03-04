@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReportFilesTable extends Migration
+class GroupUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateReportFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_files', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id');
-            $table->uuid('report_id');
-            $table->string('name');
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer('group_id')->unsigned();
         });
+
     }
 
     /**
@@ -28,6 +29,6 @@ class CreateReportFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_files');
+        Schema::dropIfExists('group_user');
     }
 }

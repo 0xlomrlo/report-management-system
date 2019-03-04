@@ -14,23 +14,30 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'name' => 'Admin',
-            'guard_name' => 'web',
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'User',
-            'guard_name' => 'web',
-        ]);
+        $roles = [
+            'admin',
+            'editing',
+            'viewing',
+            'deleting',
+         ];
+         $permissions = [
+            'create',
+            'view',
+            'edit',
+            'delete',
+         ];
 
-        $CreatePermission = Permission::where('name', 'Create')->first();
-        $ViewPermission = Permission::where('name', 'View')->first();
-        $EditPermission = Permission::where('name', 'Edit')->first();
-        $DeletePermission = Permission::where('name', 'Delete')->first();
-        $role = Role::where('name', 'admin')->first();
-        $role->givePermissionTo($CreatePermission);
-        $role->givePermissionTo($ViewPermission);
-        $role->givePermissionTo($EditPermission);
-        $role->givePermissionTo($DeletePermission);
+         foreach ($roles as $role) {
+            Role::create(['name' => $role, 'guard_name' => 'web']);
+       }
+
+        $adminRole = Role::where('name', 'admin')->first();
+        foreach ($permissions as $permission) {
+            $adminRole->givePermissionTo($permission);  
+        }
+
+        Role::where('name', 'viewing')->first()->givePermissionTo('view');  
+        Role::where('name', 'editing')->first()->givePermissionTo('edit');  
+        Role::where('name', 'deleting')->first()->givePermissionTo('delete');  
     }
 }

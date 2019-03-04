@@ -40,10 +40,28 @@ return [
         'password_validation' => '*Minimum six characters, at least one letter and one number',
         'groups' => 'Groups',
         'permissions' => 'Permissions',
+        'update_user' => 'Update user',
 
 
         //Roles
+        'role' => 'Role',
+        'roles' => 'Roles', 
         'roles_management' => 'Roles Management',
+        'create_role' => 'Create role', 
+
+
+
+
+        //Groups
+        'group_name' => 'Group name',
+        'create_group' => 'Create group',
+
+
+
+        //modal
+        'sure' => 'Are you sure?',
+        'confirm_delete' => 'Do you really want to delete? This process cannot be undone.',
+        'close' => 'Close',
 
 
 

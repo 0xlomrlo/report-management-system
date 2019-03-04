@@ -23,8 +23,28 @@
                                     <span class="input-group-text cyan lighten-2" id="basic-text1"><i
                                             class="fas fa-search text-white" aria-hidden="true"></i></span>
                                 </div>
-                                <input class="form-control my-0 py-1" type="text" placeholder="@lang('layout.search')"
-                                    aria-label="Search">
+
+                            
+                                                                          
+
+      <form action="{{ route('reports.index') }}" method="GET" class="container">
+                <div class="input-group no-border">
+              <input type="text" name="search" class="form-control" placeholder="@lang('layout.search')..." autocomplete="off">
+              <button type="submit" class="btn btn-outline-primary btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+
+            </button>
+            </div>
+          </form>
+
+
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -49,9 +69,6 @@
                         <div class="container">
 
 
-
-
-
                             <div class="card">
 
                                 @foreach ($reports as $report)
@@ -65,14 +82,18 @@
                                         <strong>@lang('layout.tags')</strong>: @foreach ($report->tags as $tag)
 
                                         <span class="badge badge-secondary">{{ $tag->name }}</span> @endforeach</div>
-                                    @can('View')
-                                        <a href="{{ route('reports.show', $report->id) }}"><button type="button"class="btn btn-outline-primary waves-effect">@lang('layout.show')</button></a>
+                                    @can('view')
+                                        <a href="{{ route('reports.show', $report->id) }}"><button type="button"class="btn btn-outline-primary btn-round"><i class="fas fa-eye"></i> @lang('layout.show')</button></a>
                                     @endcan
-                                    @can('Edit')
-                                        <button type="button" class="btn btn-outline-warning waves-effect">@lang('layout.edit')</button>
+                                    @can('edit')
+                                        <button type="button" class="btn btn-outline-warning btn-round"><i class="fas fa-edit"></i> @lang('layout.edit')</button>
                                     @endcan
-                                    @can('Delete')
-                                        <button type="button" class="btn btn-outline-danger waves-effect">@lang('layout.delete')</button>
+                                    @can('delete')
+
+                                        <button onclick="deleteData( '{{ route('reports.delete', $report->id) }}' )"
+                                                data-target="#deleteModal" data-toggle="modal" type="button" 
+                                                class="btn btn-outline-danger btn-round"><i class="fas fa-trash-alt"></i> @lang('layout.delete')</button>
+
                                     @endcan
 
                                 </div>
@@ -111,9 +132,6 @@
                             </div>
                             @endif
 
-
-
-
                         </div>
                     </div>
                 </div>
@@ -122,5 +140,5 @@
     </div>
 </div>
 
-
+@include('modal')
 @endsection

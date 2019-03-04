@@ -25,13 +25,13 @@
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">@lang('layout.username')</label>
-                                            <input type="text" name="Username" class="form-control">
+                                            <input type="text" name="username" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">@lang('layout.password')</label>
-                                            <input type="password" name="Password" class="form-control">
+                                            <input type="password" name="password" class="form-control">
                                             <label>@lang('layout.password_validation')</label>
                                         </div>
                                     </div>
@@ -144,7 +144,7 @@
             </div>
 
 
-            <div class="col-lg-6 col-md-12">
+            <!-- <div class="col-lg-6 col-md-12">
                     <div class="card">
                         <div class="card-header card-header-info card-header-icon">
                             <div class="card-icon">
@@ -184,10 +184,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
     
             <button type="submit"
-                class="btn btn-outline-primary   btn-lg btn-block ">@lang('layout.create_user')</button>
+                class="btn btn-outline-primary btn-lg btn-block btn-round">@lang('layout.create_user')</button>
         </div>
 
     </form>
