@@ -14,25 +14,13 @@ class ReportController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+
+        $this->middleware('group')->except(['index']);
     }
 
 
     public function index(Request $request)
     {
-
-        // $user_groups = Group::whereHas('users', function($query) use ($request){
-        //     $query->where('group_id', 1);
-        // })->get();
-        // $user_groups = User::with(['groups' => function($query) use ($request){
-        //             $query->where('group_id', 66);
-        // }])->get();
-        // $groups = [];
-        // foreach($user_groups as $group){
-        //     $groups += $group->name;
-        // }
-
-        // dd($user_groups);
 
         if (Input::has('search')) {
             $search = Input::get('search');
@@ -71,7 +59,7 @@ class ReportController extends Controller
 
     public function show($id)
     {
-        $report =  Report::with(['group','tags','user'])->findOrFail($id);
+        $report = Report::with(['group','tags','user'])->findOrFail($id);
 
         return view('reports.show', compact('report'));
     }

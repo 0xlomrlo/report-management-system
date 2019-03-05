@@ -15,10 +15,10 @@ class UserGroup
      */
     public function handle($request, Closure $next)
     {
-        $user_groups = App\Group::whereHas('users', function($query) use ($request){
-            $query->where('user_id', $request->user()->id);
-        })->get();
-        
-        return $next($request);
+        $report = \App\Report::findOrFail($request->route('uuid'))->with('group')->first();
+            if ($request->user()->hasGroup($report->group)) {
+                return $next($request);
+        }
+        abort(403);
     }
 }
