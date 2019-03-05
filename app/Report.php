@@ -28,6 +28,8 @@ class Report extends Model
         return 'string';
     }
 
+
+
     public function user(){
         return $this->belongsTo('App\User');
     }
@@ -44,4 +46,13 @@ class Report extends Model
         return $this->hasMany('App\ReportFile');
     }
 
+
+    public function scopeByUser($query, User $user)
+    {
+        if (!$user->hasRole('admin')) {
+
+            return $query->whereHas( 'group.users' , function($q) use ($user){$q->where('user_id', $user->id);});
+        }
+        return $query;
+    }
 }

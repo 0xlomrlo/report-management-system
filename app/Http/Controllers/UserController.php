@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Group;
-use App\Traits\RolesTrait;
+use App\Traits\RolesAndGroupsTrait;
 use Spatie\Permission\Models\Role;
 use DB;
 
 class UserController extends Controller
 {
-    use RolesTrait;
+    use RolesAndGroupsTrait;
 
     public function __construct()
     {
@@ -73,7 +73,10 @@ class UserController extends Controller
             'username' => $request->get('username'),
             'password' => $request->get('password'),
             'roles' => $request->get('roles'),
+            'groups' => $request->get('groups'),
+
         ];
+
         if(!empty($input['password'])){ 
             $input['password'] = bcrypt($input['password']);
         }else{
@@ -82,7 +85,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('group_user')->where('user_id',$id)->delete();
         $this->giveRole($user, $input['roles']);
+        $this->giveGroup($user, $input['groups']);
 
         return redirect()->route('users.index')->with('success',trans('messages.success_update'));
     }

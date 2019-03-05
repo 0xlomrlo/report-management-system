@@ -27,4 +27,15 @@ class User extends Authenticatable
     public function groups(){
         return $this->belongsToMany('App\Group');
     }
+
+    public function assignGroup(Group $group)
+    {
+        return $this->groups()->save($group);
+    }
+
+    public function hasGroup(Group $group)
+    {
+        return $this->groups->contains('id', $group->id);
+    }
+
 }

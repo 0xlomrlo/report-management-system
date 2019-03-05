@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Report;
 use Illuminate\Support\Facades\Input;
 use DB;
-use App\User; 
+use App\User;
+use App\Group;
 class ReportController extends Controller
 {
 
@@ -17,8 +18,21 @@ class ReportController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
+
+        // $user_groups = Group::whereHas('users', function($query) use ($request){
+        //     $query->where('group_id', 1);
+        // })->get();
+        // $user_groups = User::with(['groups' => function($query) use ($request){
+        //             $query->where('group_id', 66);
+        // }])->get();
+        // $groups = [];
+        // foreach($user_groups as $group){
+        //     $groups += $group->name;
+        // }
+
+        // dd($user_groups);
 
         if (Input::has('search')) {
             $search = Input::get('search');
@@ -35,10 +49,10 @@ class ReportController extends Controller
                         ->orWhereHas('tags', function($query) use ($search)
                         {
                             $query->where('name','LIKE','%' . $search . '%');
-                        })
-                        ->with(['group','tags'])->paginate(10);
+                        })->with(['group','tags'])->byUser($request->user())->paginate(10);
+                        $reports->appends($request->only('search'));
         }else{
-        $reports = Report::with(['group','tags'])->paginate(10);
+            $reports = Report::with(['group','tags'])->byUser($request->user())->paginate(10);
         }
 
         return view('reports.index', compact('reports'));
