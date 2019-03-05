@@ -79,9 +79,9 @@ class ReportController extends Controller
     {
         $user = Report::find($id)->delete();
         if ($user) {
-            return redirect()->back()->with('success', trans('messages.success_deleting_report')); 
+            return redirect()->back()->with('success', trans('messages.success_delete')); 
         }else{
-            return redirect()->back()->with('error', trans('messages.error_deleting_report')); 
+            return redirect()->back()->with('error', trans('messages.error')); 
         }
         
     }

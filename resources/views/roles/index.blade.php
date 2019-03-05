@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <h3 class="card-title">@lang('layout.roles')
-                        <a href="{{ route('users.create') }}"><button type="button" class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
+                        <a href="{{ route('roles.create') }}"><button type="button" class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
                             @lang('layout.create_role')</i></a>
                         </h3>
                         <p class="card-category"></p>
@@ -52,9 +52,12 @@
                                                     <span class="badge badge-pill badge-primary">{{ ucfirst($permission->name) }}</span>
                                                 @endforeach</td>
                                             <td>
-                                               @if ($role->name != 'admin')
-                                                <a href="" class="text-warning fa-border" title="Edit"><i class="fas fa-edit"></i></a>
-                                                <a href="" class="text-danger fa-border" title="Delete"><i class="fas fa-trash"></i></a>
+                                            <a href="{{ route('roles.edit', $role->id) }}" class="text-warning fa-border" title="Edit"><i class="fas fa-edit"></i></a>
+
+                                                @if ($role->name != 'admin')
+                                                <a href="" class="text-danger fa-border" data-toggle="modal"
+                                                    onclick="deleteData( '{{ route('roles.delete', $role->id) }}' )"
+                                                    data-target="#deleteModal" title="Delete"><i class="fas fa-trash"></i></a>
                                                 @endif
                                             </td>
                                         </tr>
@@ -72,5 +75,5 @@
     </div>
 </div>
 
-
+@include('modal')
 @endsection

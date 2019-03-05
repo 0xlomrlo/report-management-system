@@ -14,8 +14,8 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <h3 class="card-title">@lang('layout.groups')
-                        <a href="{{ route('users.create') }}"><button type="button" class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
-                            @lang('layout.create_user')</i></a>
+                        <a href="{{ route('groups.create') }}"><button type="button" class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
+                            @lang('layout.create_group')</i></a>
                         </h3>
                         <p class="card-category"></p>
                     </div>
@@ -37,14 +37,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
+                                    @foreach ($groups as $group)
                                         <tr>
-                                        <td></td>
+                                        <td>{{ $group->name }}</td>
                                             <td>
-                                                <a href="" class="text-warning fa-border" title="Edit"><i class="fas fa-edit"></i></a>
-                                                <a href="" class="text-danger fa-border" title="Delete"><i class="fas fa-trash"></i></a>
+                                                <a href="{{ route('groups.edit', $group->id) }}" class="text-warning fa-border" title="Edit"><i class="fas fa-edit"></i></a>
+
+
+                                                <a href="" class="text-danger fa-border" data-toggle="modal"
+                                                onclick="deleteData( '{{ route('groups.delete', $group->id) }}' )"
+                                                data-target="#deleteModal" title="Delete"><i class="fas fa-trash"></i></a>
+
                                             </td>
                                         </tr>
+                                        @endforeach
 
                                     </tbody>
 
@@ -58,5 +65,5 @@
     </div>
 </div>
 
-
+@include('modal')
 @endsection

@@ -48,6 +48,9 @@ return [
         'roles' => 'Roles', 
         'roles_management' => 'Roles Management',
         'create_role' => 'Create role', 
+        'update_role' => 'Update role', 
+        'role_name' => 'Role name', 
+
 
 
 
@@ -55,6 +58,8 @@ return [
         //Groups
         'group_name' => 'Group name',
         'create_group' => 'Create group',
+        'update_group' => 'Update group',
+
 
 
 

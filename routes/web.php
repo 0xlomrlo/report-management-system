@@ -22,12 +22,22 @@ Route::get('locale/{locale}', function ($locale) {
 
 // Reports
 Route::get('reports', ['as' => 'reports.index', 'uses' => 'ReportController@index']);
-Route::get('reports/{uuid}', ['as' => 'reports.show', 'uses' => 'ReportController@show'])->middleware('permission:view');
-Route::get('reports/{uuid}/create', ['as' => 'reports.create', 'uses' => 'ReportController@show'])->middleware('permission:create');
-Route::post('reports/{uuid}/create', ['as' => 'reports.post.create', 'uses' => 'ReportController@show'])->middleware('permission:create');
-Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@show'])->middleware('permission:edit');
-Route::post('reports/{uuid}/edit', ['as' => 'reports.put.edit', 'uses' => 'ReportController@show'])->middleware('permission:edit');
-Route::delete('reports/{uuid}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@destroy'])->middleware('permission:delete');
+
+Route::group(['middleware' => ['permission:view']], function() {
+    Route::get('reports/{uuid}', ['as' => 'reports.show', 'uses' => 'ReportController@show']);
+});
+
+Route::group(['middleware' => ['permission:create']], function() {
+    Route::get('reports/{uuid}/create', ['as' => 'reports.create', 'uses' => 'ReportController@show']);
+    Route::post('reports/{uuid}/create', ['as' => 'reports.post.create', 'uses' => 'ReportController@show']);
+});
+Route::group(['middleware' => ['permission:edit']], function() {
+    Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@show']);
+    Route::post('reports/{uuid}/edit', ['as' => 'reports.put.edit', 'uses' => 'ReportController@show']);
+});
+Route::group(['middleware' => ['permission:delete']], function() {
+    Route::delete('reports/{uuid}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@destroy']);
+});
 
 
 // Admin
@@ -37,9 +47,22 @@ Route::group(['middleware' => ['role:admin']], function() {
     Route::post('users/create', ['as' => 'users.store', 'uses' => 'UserController@store']);
     Route::get('users/{id}/edit', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
     Route::put('users/{id}/update', ['as' => 'users.update', 'uses' => 'UserController@update']);
-
-
     Route::delete('users/{id}/delete', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);
+
     Route::get('groups', ['as' => 'groups.index', 'uses' => 'GroupController@index']);
+    Route::get('groups/create', ['as' => 'groups.create', 'uses' => 'GroupController@create']);
+    Route::post('groups/create', ['as' => 'groups.store', 'uses' => 'GroupController@store']);
+    Route::get('groups/{id}/edit', ['as' => 'groups.edit', 'uses' => 'GroupController@edit']);
+    Route::put('groups/{id}/update', ['as' => 'groups.update', 'uses' => 'GroupController@update']);
+    Route::delete('groups/{id}/delete', ['as' => 'groups.delete', 'uses' => 'GroupController@destroy']);
+
+
     Route::get('roles', ['as' => 'roles.index', 'uses' => 'RoleController@index']);
+    Route::get('roles/create', ['as' => 'roles.create', 'uses' => 'RoleController@create']);
+    Route::post('roles/create', ['as' => 'roles.store', 'uses' => 'RoleController@store']);
+    Route::get('roles/{id}/edit', ['as' => 'roles.edit', 'uses' => 'RoleController@edit']);
+    Route::put('roles/{id}/update', ['as' => 'roles.update', 'uses' => 'RoleController@update']);
+    Route::delete('roles/{id}/delete', ['as' => 'roles.delete', 'uses' => 'RoleController@destroy']);
+
+
 });

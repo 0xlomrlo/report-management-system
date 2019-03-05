@@ -8,6 +8,10 @@ class Group extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function report(){
         return $this->hasMany('App\Report');
     }

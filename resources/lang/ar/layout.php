@@ -50,10 +50,14 @@ return [
         'roles' => 'الادوار', 
         'roles_management' => 'ادارة الادوار',
         'create_role' => 'إنشاء دور', 
+        'update_role' => 'تحديث الدور', 
+        'role_name' => 'اسم الدور', 
+
 
         //Groups
         'group_name' => 'اسم المجموعة',
         'create_group' => 'إنشاء مجموعة',
+        'update_group' => 'تحديث المجموعة',
 
 
         //modal

@@ -67,7 +67,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (Spatie\Permission\Models\Role::all() as $role)   
+                                        @foreach ($roles as $role)   
                                         <tr>
                                             <td>{{ ucfirst($role->name) }}</td>
                                             <td>
@@ -110,8 +110,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($groups as $group)
                                         <tr>
-                                            <td>General</td>
+                                            <td>{{ $group->name }}</td>
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
@@ -123,19 +124,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Saudi Arabia</td>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="">
-                                                        <span class="form-check-sign">
-                                                            <span class="check"></span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
