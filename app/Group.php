@@ -12,11 +12,13 @@ class Group extends Model
         'name',
     ];
 
-    public function report(){
+    public function report()
+    {
         return $this->hasMany('App\Report');
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany('App\User');
     }
 }

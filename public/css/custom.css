@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Tajawal:500');
+
+body {
+  font-family: 'Tajawal', sans-serif;
+}
+
+
+
+.my-custom-scrollbar {
+position: relative;
+height: 200px;
+overflow: auto;
+overflow-x:hidden;
+}
+
+
+::-webkit-scrollbar {
+width: 12px;
+}
+::-webkit-scrollbar-thumb {
+ border-radius: 10px;
+background-color: #9999993d;
+}

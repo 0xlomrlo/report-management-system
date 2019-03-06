@@ -55,26 +55,38 @@
                                             <td>@if($user->created_at){{ $user->created_at->format('Y-m-d') }}@endif
                                             </td>
                                             <td>
-                                                
-                                            <a href="{{ route('users.edit', $user->id) }}" class="text-warning fa-border" title="Edit"><i
+
+                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                    class="text-warning fa-border" title="Edit"><i
                                                         class="fas fa-user-edit"></i></a>
 
 
-                                            @if (!$user->hasRole('admin'))<a href="" class="text-danger fa-border" data-toggle="modal"
+                                                @if (!$user->hasRole('admin'))<a href="" class="text-danger fa-border"
+                                                    data-toggle="modal"
                                                     onclick="deleteData( '{{ route('users.delete', $user->id) }}' )"
-                                                    data-target="#deleteModal" title="Delete"><i class="fas fa-user-times"></i></a>@endif
+                                                    data-target="#deleteModal" title="Delete"><i
+                                                        class="fas fa-user-times"></i></a>@endif
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <hr />
+                                @if ($users->hasPages())
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination pg-blue justify-content-center">
+                                        {{ $users->onEachSide(3)->links() }}
+                                    </ul>
+                                </nav>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @include('modal')

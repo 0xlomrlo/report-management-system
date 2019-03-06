@@ -83,7 +83,7 @@
                 </div>
     
             <button type="submit"
-                class="btn btn-outline-primary btn-lg btn-block btn-round">@lang('layout.create_role')</button>
+                class="btn btn-lg btn-block btn-round" style="background-color: #879ca7;color: #fff;">@lang('layout.create_role')</button>
         </div>
     </form>
 </div>

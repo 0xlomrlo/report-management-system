@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Group;
+use Illuminate\Http\Request;
 
 class GroupController extends Controller
 {
@@ -13,10 +13,9 @@ class GroupController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index()
     {
-        $groups = Group::all();
+        $groups = Group::paginate(10);
         return view('groups.index', compact('groups'));
     }
 

@@ -1,8 +1,7 @@
 <?php
 
-
 // Authentication
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['web']], function () {
     Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
     Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
     Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
@@ -19,29 +18,27 @@ Route::get('locale/{locale}', function ($locale) {
     return redirect()->back();
 })->name('locale');
 
-
 // Reports
 Route::get('reports', ['as' => 'reports.index', 'uses' => 'ReportController@index']);
 
-Route::group(['middleware' => ['permission:view']], function() {
+Route::group(['middleware' => ['permission:view']], function () {
     Route::get('reports/{uuid}', ['as' => 'reports.show', 'uses' => 'ReportController@show']);
 });
 
-Route::group(['middleware' => ['permission:create']], function() {
+Route::group(['middleware' => ['permission:create']], function () {
     Route::get('reports/{uuid}/create', ['as' => 'reports.create', 'uses' => 'ReportController@show']);
     Route::post('reports/{uuid}/create', ['as' => 'reports.post.create', 'uses' => 'ReportController@show']);
 });
-Route::group(['middleware' => ['permission:edit']], function() {
+Route::group(['middleware' => ['permission:edit']], function () {
     Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@show']);
     Route::post('reports/{uuid}/edit', ['as' => 'reports.put.edit', 'uses' => 'ReportController@show']);
 });
-Route::group(['middleware' => ['permission:delete']], function() {
+Route::group(['middleware' => ['permission:delete']], function () {
     Route::delete('reports/{uuid}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@destroy']);
 });
 
-
 // Admin
-Route::group(['middleware' => ['role:admin']], function() {
+Route::group(['middleware' => ['role:admin']], function () {
     Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
     Route::get('users/create', ['as' => 'users.create', 'uses' => 'UserController@create']);
     Route::post('users/create', ['as' => 'users.store', 'uses' => 'UserController@store']);
@@ -56,13 +53,11 @@ Route::group(['middleware' => ['role:admin']], function() {
     Route::put('groups/{id}/update', ['as' => 'groups.update', 'uses' => 'GroupController@update']);
     Route::delete('groups/{id}/delete', ['as' => 'groups.delete', 'uses' => 'GroupController@destroy']);
 
-
     Route::get('roles', ['as' => 'roles.index', 'uses' => 'RoleController@index']);
     Route::get('roles/create', ['as' => 'roles.create', 'uses' => 'RoleController@create']);
     Route::post('roles/create', ['as' => 'roles.store', 'uses' => 'RoleController@store']);
     Route::get('roles/{id}/edit', ['as' => 'roles.edit', 'uses' => 'RoleController@edit']);
     Route::put('roles/{id}/update', ['as' => 'roles.update', 'uses' => 'RoleController@update']);
     Route::delete('roles/{id}/delete', ['as' => 'roles.delete', 'uses' => 'RoleController@destroy']);
-
 
 });

@@ -49,9 +49,6 @@ class Report extends Model
 
     public function scopeByUser($query, User $user)
     {
-        if (!$user->hasRole('admin')) {
-            return $query->whereHas( 'group.users' , function($q) use ($user){$q->where('user_id', $user->id);});
-        }
-        return $query;
+        return $query->whereHas( 'group.users' , function($q) use ($user){$q->where('user_id', $user->id);});
     }
 }

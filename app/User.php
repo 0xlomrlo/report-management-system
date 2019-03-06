@@ -2,11 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use DB;
+
 class User extends Authenticatable
 {
     use Notifiable, HasRoles;
@@ -14,17 +13,18 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'password',
     ];
-    
+
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-
-    public function reports(){
+    public function reports()
+    {
         return $this->hasMany('App\Report', 'user_id');
     }
 
-    public function groups(){
+    public function groups()
+    {
         return $this->belongsToMany('App\Group');
     }
 

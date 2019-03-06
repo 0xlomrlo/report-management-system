@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -13,7 +13,6 @@ class RoleController extends Controller
     {
         $this->middleware('auth');
     }
-
 
     public function index()
     {
@@ -41,13 +40,12 @@ class RoleController extends Controller
 
         Role::create(['name' => $input['roleName'], 'guard_name' => 'web']);
         $role = Role::where('name', $input['roleName'])->first();
-        foreach($input['permissions'] as $permission){
+        foreach ($input['permissions'] as $permission) {
             $role->givePermissionTo($permission);
         }
 
         return redirect('roles')->with('success', trans('messages.success_create'));
     }
-
 
     public function edit($id)
     {
@@ -72,7 +70,7 @@ class RoleController extends Controller
         foreach ($permissions as $permission) {
             $role->revokePermissionTo($permission);
         }
-        foreach($input['permissions'] as $permission){
+        foreach ($input['permissions'] as $permission) {
             $role->givePermissionTo($permission);
         }
 
@@ -81,10 +79,10 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-       $role = Role::findById($id)->delete();
-       if($role){
-           return redirect('roles')->with('success', trans('messages.success_delete'));
-       }
-       return redirect('roles')->with('error', trans('messages.error'));
+        $role = Role::findById($id)->delete();
+        if ($role) {
+            return redirect('roles')->with('success', trans('messages.success_delete'));
+        }
+        return redirect('roles')->with('error', trans('messages.error'));
     }
 }

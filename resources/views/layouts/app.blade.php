@@ -14,13 +14,8 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/material-dashboard-rtl.css') }}" rel="stylesheet" />
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Tajawal:500');
+  <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
-    body {
-      font-family: 'Tajawal', sans-serif;
-    }
-  </style>
 </head>
 
 <body>
