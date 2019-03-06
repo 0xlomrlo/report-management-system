@@ -116,7 +116,7 @@
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" name="groups[]" value="{{ $group->id }}" {{ ($user->hasGroup($group)) ? 'checked' : '' }}>
+                                                    <input class="form-check-input" type="checkbox" name="groups[]" value="{{ $group->id }}" {{ ($user->hasGroup($group->id)) ? 'checked' : '' }}>
                                                         <span class="form-check-sign">
                                                             <span class="check"></span>
                                                         </span>

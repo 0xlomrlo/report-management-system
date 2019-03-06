@@ -6,19 +6,14 @@ use Closure;
 
 class UserGroup
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
-        $report = \App\Report::findOrFail($request->route('uuid'))->with('group')->first();
-            if ($request->user()->hasGroup($report->group)) {
+        $report = \App\Report::where('id', $request->route('uuid'))->with('group')->first();
+        if (!is_null($report->group)) {        
+            if ($request->user()->hasGroup($report->group->id)) {
                 return $next($request);
         }
+    }
         abort(403);
     }
 }

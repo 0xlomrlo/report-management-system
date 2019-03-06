@@ -14,7 +14,7 @@ class ReportController extends Controller
 
     public function __construct()
     {
-
+        $this->middleware('auth');
         $this->middleware('group')->except(['index']);
     }
 
@@ -40,7 +40,7 @@ class ReportController extends Controller
                         })->with(['group','tags'])->byUser($request->user())->paginate(10);
                         $reports->appends($request->only('search'));
         }else{
-            $reports = Report::with(['group','tags'])->byUser($request->user())->paginate(10);
+            $reports = Report::byUser($request->user())->with(['group','tags'])->paginate(10);
         }
 
         return view('reports.index', compact('reports'));
