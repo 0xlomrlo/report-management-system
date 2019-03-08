@@ -10,5 +10,6 @@ return [
     'success_delete' => 'Successfully deleted.',
 
     'error_deleting_admin' => 'Can not delete a user with administrator privilege.',
+    'file_not_found' => 'File not found',
 
 ];

@@ -13,19 +13,15 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <h3 class="card-title">@lang('layout.roles')
-                        <a href="{{ route('roles.create') }}"><button type="button" class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
-                            @lang('layout.create_role')</i></a>
+                            <a href="{{ route('roles.create') }}"><button type="button"
+                                    class="btn btn-warning btn-round btn-sm"><i class="fas fa-plus"></i>
+                                    @lang('layout.create_role')</i></a>
                         </h3>
                         <p class="card-category"></p>
                     </div>
                     <div class="container">
-
-                    <div class="card-body">
-
-
-
-
-                            <div class="table-wrapper">
+                        <div class="card-body">
+                            <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead>
                                         <tr>
@@ -44,20 +40,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                         @foreach ($roles as $role)
                                         <tr>
-                                        <td>{{ ucfirst($role->name) }}</td>
-                                                <td>@foreach ($role->permissions as $permission)
-                                                    <span class="badge badge-pill badge-primary">{{ ucfirst($permission->name) }}</span>
+                                            <td>{{ ucfirst($role->name) }}</td>
+                                            <td>@foreach ($role->permissions as $permission)
+                                                <span
+                                                    class="badge badge-pill badge-primary">{{ ucfirst($permission->name) }}</span>
                                                 @endforeach</td>
                                             <td>
-                                            <a href="{{ route('roles.edit', $role->id) }}" class="text-warning fa-border" title="Edit"><i class="fas fa-edit"></i></a>
+                                                <a href="{{ route('roles.edit', $role->id) }}"
+                                                    class="text-warning fa-border" title="Edit"><i
+                                                        class="fas fa-edit"></i></a>
 
                                                 @if ($role->name != 'admin')
                                                 <a href="" class="text-danger fa-border" data-toggle="modal"
                                                     onclick="deleteData( '{{ route('roles.delete', $role->id) }}' )"
-                                                    data-target="#deleteModal" title="Delete"><i class="fas fa-trash"></i></a>
+                                                    data-target="#deleteModal" title="Delete"><i
+                                                        class="fas fa-trash"></i></a>
                                                 @endif
                                             </td>
                                         </tr>

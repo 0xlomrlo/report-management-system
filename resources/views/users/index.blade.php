@@ -7,9 +7,8 @@
 
 @section('content')
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
+
+<div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-info">
@@ -22,7 +21,7 @@
                     </div>
                     <div class="container">
                         <div class="card-body">
-                            <div class="table-wrapper">
+                            <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead>
                                         <tr>
@@ -78,16 +77,15 @@
                                         {{ $users->onEachSide(3)->links() }}
                                     </ul>
                                 </nav>
+                                @endif
                             </div>
-                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 
+    
 @include('modal')
 @endsection

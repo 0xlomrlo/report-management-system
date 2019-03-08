@@ -10,10 +10,6 @@ return [
     'success_delete' => 'تم الحذف بنجاح.',
 
     'error_deleting_admin' => 'لا يمكن حذف مستخدم بصلاحية مدير.',
-
-
-
-
-
+    'file_not_found' => 'لم يتم العثور على الملف',
 
 ];

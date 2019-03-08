@@ -28,27 +28,43 @@ class Report extends Model
         return 'string';
     }
 
-
-
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 
-    public function group(){
+    public function group()
+    {
         return $this->belongsTo('App\Group');
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany('App\Tag');
     }
 
-    public function files(){
+    public function files()
+    {
         return $this->hasMany('App\ReportFile');
     }
 
-
     public function scopeByUser($query, User $user)
     {
-        return $query->whereHas( 'group.users' , function($q) use ($user){$q->where('user_id', $user->id);});
+        return $query->whereHas('group.users', function ($q) use ($user) {$q->where('user_id', $user->id);});
+    }
+
+    public function scopeGeneralSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('content', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('user', function ($query) use ($search) {
+                $query->where('username', 'LIKE', '%' . $search . '%');
+            })
+            ->orWhereHas('group', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->orWhereHas('tags', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
     }
 }

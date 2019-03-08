@@ -19,19 +19,22 @@ Route::get('locale/{locale}', function ($locale) {
 })->name('locale');
 
 // Reports
-Route::get('reports', ['as' => 'reports.index', 'uses' => 'ReportController@index']);
+Route::get('reports/', ['as' => 'reports.index', 'uses' => 'ReportController@index']);
 
 Route::group(['middleware' => ['permission:view']], function () {
     Route::get('reports/{uuid}', ['as' => 'reports.show', 'uses' => 'ReportController@show']);
+    Route::get('reports/{uuid}/{name}', ['as' => 'report.files', 'uses' => 'ReportController@getDownload']);
+
 });
 
 Route::group(['middleware' => ['permission:create']], function () {
-    Route::get('reports/{uuid}/create', ['as' => 'reports.create', 'uses' => 'ReportController@show']);
-    Route::post('reports/{uuid}/create', ['as' => 'reports.post.create', 'uses' => 'ReportController@show']);
+    Route::get('create/report', ['as' => 'reports.create', 'uses' => 'ReportController@create']);
+    Route::post('create/report', ['as' => 'reports.store', 'uses' => 'ReportController@store']);
 });
 Route::group(['middleware' => ['permission:edit']], function () {
     Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@show']);
-    Route::post('reports/{uuid}/edit', ['as' => 'reports.put.edit', 'uses' => 'ReportController@show']);
+    Route::put('reports/{uuid}/edit', ['as' => 'reports.update', 'uses' => 'ReportController@edit']);
+
 });
 Route::group(['middleware' => ['permission:delete']], function () {
     Route::delete('reports/{uuid}/delete', ['as' => 'reports.delete', 'uses' => 'ReportController@destroy']);

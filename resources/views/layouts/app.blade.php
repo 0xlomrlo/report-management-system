@@ -14,7 +14,9 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/material-dashboard-rtl.css') }}" rel="stylesheet" />
+  <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
+
 
 </head>
 
@@ -38,7 +40,7 @@
 
           @can('create')
             <li class="nav-item active " >
-                <a class="nav-link" href="" style="background-color: coral;">
+            <a class="nav-link" href="{{ route('reports.create') }}" style="background-color: coral;">
                   <i class="material-icons">add_box</i>
                   <p> @lang('layout.create_report') </p>
                 </a>
@@ -165,7 +167,7 @@
           </div>
         </div>
         @endif
-        <div class="container-fluid">
+        <div class="container">
           @yield('content')
         </div>
       </div>
@@ -179,7 +181,8 @@
       });
     }, 4000);
   </script>
-  
+
+  <script src="{{ asset('js/mdb.min.js') }}"></script>
   <script src="{{ asset('js/modal.js') }}"></script>
   <script src="{{ asset('js/core/jquery.min.js') }}"></script>
   <script src="{{ asset('js/core/popper.min.js') }}"></script>

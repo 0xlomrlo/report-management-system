@@ -2,50 +2,58 @@
 
 
 @section('navbar')
-@lang('layout.users_management')
+@lang('layout.reports')
 @endsection
 
 @section('content')
 
-<form action="{{ route('users.store') }}" method="POST">
+
+<form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
+
+
     <div class="row">
         <div class="container">
             <div class="card">
                 <div class="card-header card-header-info">
-                    <h4 class="card-title">@lang('layout.new_user')</h4>
+                    <h4 class="card-title">@lang('layout.new_report')</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">@lang('layout.username')</label>
-                                <input type="text" name="username" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label class="bmd-label-floating">@lang('layout.password')</label>
-                                <input type="password" name="password" class="form-control">
-                                <label>@lang('layout.password_validation')</label>
+                        <div class="col-md-12">
+                            <div class="form-group bmd-form-group">
+                                <label class="bmd-label-floating">@lang('layout.report_name')</label>
+                                <input type="text" name="reportName" class="form-control">
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-group bmd-form-group">
+                                    <label class="bmd-label-floating">@lang('layout.type_report_content')</label>
+                                    <textarea class="form-control" name="content" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header card-header-info card-header-icon">
                     <div class="card-icon">
-                        <i class="material-icons">group</i>
+                        <i class="material-icons">label</i>
                     </div>
-                    <h4 class="card-title">@lang('layout.user_role')</h4>
+                    <h4 class="card-title">@lang('layout.tags')</h4>
                 </div>
                 <div class="card-body">
                     <div class="container">
@@ -58,14 +66,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($roles as $role)
+                                    @foreach ($tags as $tag)
                                     <tr>
-                                        <td>{{ ucfirst($role->name) }}</td>
+                                        <td>{{ ucfirst($tag->name) }}</td>
                                         <td>
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" name="roles[]"
-                                                        value="{{ $role->id }}">
+                                                    <input class="form-check-input" type="checkbox" name="tags[]"
+                                                        value="{{ $tag->id }}">
                                                     <span class="form-check-sign">
                                                         <span class="check"></span>
                                                     </span>
@@ -88,7 +96,7 @@
                     <div class="card-icon">
                         <i class="material-icons">group_work</i>
                     </div>
-                    <h4 class="card-title">@lang('layout.groups')</h4>
+                    <h4 class="card-title">@lang('layout.group')</h4>
                 </div>
                 <div class="card-body">
                     <div class="container">
@@ -107,9 +115,9 @@
                                         <td>
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" name="groups[]"
+                                                    <input class="form-check-input" type="radio" name="group"
                                                         value="{{ $group->id }}">
-                                                    <span class="form-check-sign">
+                                                    <span class="circle">
                                                         <span class="check"></span>
                                                     </span>
                                                 </label>
@@ -124,8 +132,23 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="card">
+                <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">cloud_upload</i>
+                    </div>
+                    <h4 class="card-title">@lang('layout.files')</h4>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <input type="file" name="files[]" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-blue-grey btn-lg btn-block btn-round">@lang('layout.create_user')</button>
+    <button type="submit" class="btn btn-blue-grey btn-lg btn-block btn-round">@lang('layout.create_report')</button>
 </form>
 
 @endsection

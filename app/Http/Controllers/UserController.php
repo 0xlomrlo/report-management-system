@@ -100,10 +100,10 @@ class UserController extends Controller
         $user = User::find($id);
         if ($user->hasRole('admin')) {
             return redirect()->back()->with('error', trans('messages.error_deleting_admin'));
-        } else {
-            DB::table('model_has_roles')->where('model_id', $id)->delete();
-            $user->delete();
         }
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->delete();
+
         return redirect()->back()->with('success', trans('messages.success_delete'));
     }
 }
