@@ -97,28 +97,76 @@ class ReportController extends Controller
         return redirect('reports/' . $uuid)->with('error', trans('messages.file_not_found'));
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $report = Report::with(['group', 'tags', 'user', 'files'])->findOrFail($id);
+        $tags = Tag::all();
+        $groups = $request->user()->groups;
 
+        return view('reports/edit', compact('report', 'tags', 'groups'));
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'reportName' => 'required',
+            'content' => 'nullable',
+            'group' => 'required',
+            'tags' => 'required',
+        ]);
 
+        if (!$request->user()->hasGroup($request->get('group'))) {
+            return redirect()->back()->with('error', trans('messages.error'));
+        }
+
+        $input = [
+            'name' => $request->get('reportName'),
+            'content' => $request->get('content'),
+            'group_id' => $request->get('group'),
+            'user_id' => $request->user()->id,
+        ];
+
+        $report = Report::findOrFail($id);
+        $report->update($input);
+
+        if ($request->has('dFiles')) {
+            $filesId = $request->get('dFiles');
+            foreach ($filesId as $fileId) {
+                $file = ReportFile::find($fileId);
+                Storage::disk('local')->delete(
+                    'reports/' . $report->id . '/' . $file->name,
+                );
+                $file->delete();
+            }
+        }
+        if ($request->hasFile('files')) {
+            $files = $request->File('files');
+            foreach ($files as $file) {
+                $filename = $file->getClientOriginalName();
+                Storage::disk('local')->putFileAs(
+                    'reports/' . $report->id,
+                    $file,
+                    $filename
+                );
+
+                ReportFile::create(['name' => $filename, 'report_id' => $report->id]);
+            }
+        }
+
+        return redirect('reports/' . $id)->with('success', trans('messages.success_update'));
     }
 
     public function destroy($id)
     {
         $report = Report::findOrFail($id);
-        if ($report) {
-            $report->tags()->detach();
-            $report->files()->delete();
-            Storage::deleteDirectory('reports/' . $report->id);
-            $report->delete();
-            return redirect('reports')->with('success', trans('messages.success_delete'));
-        } else {
+        if (!$report) {
             return redirect()->back()->with('error', trans('messages.error'));
         }
+        $report->tags()->detach();
+        $report->files()->delete();
+        Storage::deleteDirectory('reports/' . $report->id);
+        $report->delete();
 
+        return redirect('reports')->with('success', trans('messages.success_delete'));
     }
 }

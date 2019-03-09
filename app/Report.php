@@ -48,6 +48,11 @@ class Report extends Model
         return $this->hasMany('App\ReportFile');
     }
 
+    public function hasTag($tagId)
+    {
+        return $this->tags->contains($tagId);
+    }
+
     public function scopeByUser($query, User $user)
     {
         return $query->whereHas('group.users', function ($q) use ($user) {$q->where('user_id', $user->id);});

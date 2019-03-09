@@ -32,8 +32,8 @@ Route::group(['middleware' => ['permission:create']], function () {
     Route::post('create/report', ['as' => 'reports.store', 'uses' => 'ReportController@store']);
 });
 Route::group(['middleware' => ['permission:edit']], function () {
-    Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@show']);
-    Route::put('reports/{uuid}/edit', ['as' => 'reports.update', 'uses' => 'ReportController@edit']);
+    Route::get('reports/{uuid}/edit', ['as' => 'reports.edit', 'uses' => 'ReportController@edit']);
+    Route::put('reports/{uuid}/edit', ['as' => 'reports.update', 'uses' => 'ReportController@update']);
 
 });
 Route::group(['middleware' => ['permission:delete']], function () {

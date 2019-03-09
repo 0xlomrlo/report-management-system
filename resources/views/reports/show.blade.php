@@ -36,8 +36,8 @@
                     <hr />
                     <td>
                     @can('edit')
-                        <button type="button" class="btn btn-outline-warning btn-round"><i class="fas fa-edit"></i>
-                            @lang('layout.edit')</button>
+                    <a href="{{ route('reports.edit', $report->id) }}"><button type="button" class="btn btn-outline-warning btn-round"><i class="fas fa-edit"></i>
+                            @lang('layout.edit')</button></a>
                     @endcan
                     @can('edit')
                         <button href="javascript:;" onclick="deleteData( '{{ route('reports.delete', $report->id) }}' )"

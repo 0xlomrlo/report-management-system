@@ -76,10 +76,13 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $role = Role::findOrFail($id)->delete();
-        if (!$role) {
+        $role = Role::findOrFail($id);
+        if ($role->name == 'admin') {
             return redirect('roles')->with('error', trans('messages.error'));
+        }else{
+            $role->delete();
         }
+        
         return redirect('roles')->with('success', trans('messages.success_delete'));
     }
 }

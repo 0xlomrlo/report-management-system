@@ -14,7 +14,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header card-header-info">
-                    <h4 class="card-title">@lang('layout.create_group')</h4>
+                    <h4 class="card-title">@lang('layout.update_group')</h4>
                     <p class="card-category"></p>
                 </div>
                 <div class="card-body">
