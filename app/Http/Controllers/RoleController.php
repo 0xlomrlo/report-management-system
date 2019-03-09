@@ -17,12 +17,14 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::orderBy('id')->get();
+
         return view('roles.index', compact('roles'));
     }
 
     public function create()
     {
         $permissions = Permission::all();
+
         return view('roles.create', compact('permissions'));
     }
 
@@ -36,13 +38,11 @@ class RoleController extends Controller
         $input = [
             'roleName' => $request->get('roleName'),
             'permissions' => $request->get('permissions'),
+            
         ];
 
-        Role::create(['name' => $input['roleName'], 'guard_name' => 'web']);
-        $role = Role::where('name', $input['roleName'])->first();
-        foreach ($input['permissions'] as $permission) {
-            $role->givePermissionTo($permission);
-        }
+        $role = Role::create(['name' => $input['roleName']]);
+        $role->givePermissionTo($input['permissions']);
 
         return redirect('roles')->with('success', trans('messages.success_create'));
     }
@@ -51,6 +51,7 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $permissions = Permission::all();
+
         return view('roles.edit', compact('role', 'permissions'));
     }
 
@@ -67,22 +68,18 @@ class RoleController extends Controller
             'roleName' => $request->get('roleName'),
             'permissions' => $request->get('permissions'),
         ];
-        foreach ($permissions as $permission) {
-            $role->revokePermissionTo($permission);
-        }
-        foreach ($input['permissions'] as $permission) {
-            $role->givePermissionTo($permission);
-        }
+        $role->revokePermissionTo($permissions);
+        $role->givePermissionTo($input['permissions']);
 
         return redirect('roles')->with('success', trans('messages.success_update'));
     }
 
     public function destroy($id)
     {
-        $role = Role::findById($id)->delete();
-        if ($role) {
-            return redirect('roles')->with('success', trans('messages.success_delete'));
+        $role = Role::findOrFail($id)->delete();
+        if (!$role) {
+            return redirect('roles')->with('error', trans('messages.error'));
         }
-        return redirect('roles')->with('error', trans('messages.error'));
+        return redirect('roles')->with('success', trans('messages.success_delete'));
     }
 }

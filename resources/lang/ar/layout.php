@@ -21,6 +21,7 @@ return [
     'report_name' => 'اسم التقرير',
     'type_report_content' => 'اكتب محتويات التقرير',
     'search' => 'البحث',
+    'search_placeholder' => 'يمكنك البحث عن طريق اسم التقرير أو المحتوى أو الوسوم أو المجموعة أو المنشئ.',
     'group' => 'المجموعة',
     'tags' => 'الوسوم',
     'show' => 'عرض',
@@ -31,7 +32,8 @@ return [
     'files' => 'الملفات',
     'attachments' => 'المرفقات',
     'no_files' => 'لاتوجد ملفات',
-
+    'no_reports' => 'لاتوجد تقارير',
+    
     //pagination
     'previous' => 'السابق',
     'next' => 'التالي',

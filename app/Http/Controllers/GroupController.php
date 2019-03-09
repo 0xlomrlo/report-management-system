@@ -16,6 +16,7 @@ class GroupController extends Controller
     public function index()
     {
         $groups = Group::paginate(10);
+        
         return view('groups.index', compact('groups'));
     }
 
@@ -60,16 +61,14 @@ class GroupController extends Controller
         $group->update(['name' => $input['groupName']]);
 
         return redirect('groups')->with('success', trans('messages.success_update'));
-
     }
 
     public function destroy($id)
     {
-        $group = Group::findOrFail($id);
-        $group->delete();
-        if ($group) {
-            return redirect('groups')->with('success', trans('messages.success_delete'));
+        $group = Group::findOrFail($id)->delete();
+        if (!$group) {
+            return redirect('groups')->with('error', trans('messages.error'));
         }
-        return redirect('groups')->with('error', trans('messages.error'));
+        return redirect('groups')->with('success', trans('messages.success_delete'));
     }
 }

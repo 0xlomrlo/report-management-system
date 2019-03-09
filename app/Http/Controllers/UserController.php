@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Traits\RolesAndGroupsTrait;
 use App\User;
-use DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -87,8 +86,8 @@ class UserController extends Controller
             $input = array_except($input, array('password'));
         }
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-        DB::table('group_user')->where('user_id', $id)->delete();
+        $user->roles()->detach();
+        $user->groups()->detach();
         $this->giveRole($user, $input['roles']);
         $this->giveGroup($user, $input['groups']);
 
@@ -97,13 +96,13 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::find($id);
-        if ($user->hasRole('admin')) {
-            return redirect()->back()->with('error', trans('messages.error_deleting_admin'));
+        $user = User::findOrFail($id);
+        if (!$user->hasRole('admin')) {
+            $user->roles()->detach();
+            $user->delete();
+    
+            return redirect('users')->with('success', trans('messages.success_delete'));
         }
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-        $user->delete();
-
-        return redirect()->back()->with('success', trans('messages.success_delete'));
+        return redirect('users')->with('error', trans('messages.error_deleting_admin'));
     }
 }

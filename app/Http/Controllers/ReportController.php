@@ -88,7 +88,7 @@ class ReportController extends Controller
         return view('reports.show', compact('report'));
     }
 
-    public function getDownload($uuid, $name)
+    public function getFile($uuid, $name)
     {
         if (file_exists(storage_path('app/reports/' . $uuid . '/' . $name))) {
             return response()->download(storage_path('app/reports/' . $uuid . '/' . $name));

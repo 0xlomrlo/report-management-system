@@ -23,7 +23,7 @@ Route::get('reports/', ['as' => 'reports.index', 'uses' => 'ReportController@ind
 
 Route::group(['middleware' => ['permission:view']], function () {
     Route::get('reports/{uuid}', ['as' => 'reports.show', 'uses' => 'ReportController@show']);
-    Route::get('reports/{uuid}/{name}', ['as' => 'report.files', 'uses' => 'ReportController@getDownload']);
+    Route::get('reports/download/{uuid}/{name}', ['as' => 'report.files', 'uses' => 'ReportController@getFile']);
 
 });
 

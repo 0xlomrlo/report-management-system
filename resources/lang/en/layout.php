@@ -22,6 +22,7 @@ return [
     'report_name' => 'Report name',
     'type_report_content' => 'Type the contents of the report',
     'search' => 'Search',
+    'search_placeholder' => 'You can search by report name, content, tags, group, creator.',
     'group' => 'Group',
     'tags' => 'Tags',
     'show' => 'Show',
@@ -32,6 +33,7 @@ return [
     'files' => 'Files',
     'attachments' => 'Attachments',
     'no_files' => 'There are no files',
+    'no_reports' => 'There are no reports',
 
     //pagination
     'previous' => 'Previous',
