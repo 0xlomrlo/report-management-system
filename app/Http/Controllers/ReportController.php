@@ -128,6 +128,11 @@ class ReportController extends Controller
 
         $report = Report::findOrFail($id);
         $report->update($input);
+        $report->tags()->detach();
+
+        foreach ($request->get('tags') as $tag) {
+            $report->tags()->attach($tag);
+        }
 
         if ($request->has('dFiles')) {
             $filesId = $request->get('dFiles');
