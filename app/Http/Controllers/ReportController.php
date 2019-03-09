@@ -47,6 +47,7 @@ class ReportController extends Controller
             'content' => 'nullable',
             'group' => 'required',
             'tags' => 'required',
+            'files' => 'mimes:jpeg,bmp,png,gif,svg,pdf,doc,docx,ppt,pptx,txt',
         ]);
 
         if (!$request->user()->hasGroup($request->get('group'))) {
@@ -113,6 +114,7 @@ class ReportController extends Controller
             'content' => 'nullable',
             'group' => 'required',
             'tags' => 'required',
+            'files' => 'mimes:jpeg,bmp,png,gif,svg,pdf,doc,docx,ppt,pptx,txt',
         ]);
 
         if (!$request->user()->hasGroup($request->get('group'))) {
