@@ -14,7 +14,6 @@ class CreateReportsTable extends Migration
     public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->uuid('id')->primary();
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('group_id')->nullable();

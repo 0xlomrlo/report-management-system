@@ -14,10 +14,11 @@ class ReportTag extends Migration
     public function up()
     {
         Schema::create('report_tag', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->uuid('report_id');
             $table->integer('tag_id')->unsigned();
+
+            $table->index(['report_id', 'tag_id'])->unique();
         });
 
     }

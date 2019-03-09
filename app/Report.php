@@ -60,7 +60,7 @@ class Report extends Model
 
     public function scopeGeneralSearch($query, $search)
     {
-        return $query->where('name', 'LIKE', '%' . $search . '%')
+        return $query->orWhere('name', 'LIKE', '%' . $search . '%')
             ->orWhere('content', 'LIKE', '%' . $search . '%')
             ->orWhereHas('user', function ($query) use ($search) {
                 $query->where('username', 'LIKE', '%' . $search . '%');
@@ -69,7 +69,7 @@ class Report extends Model
                 $query->where('name', 'LIKE', '%' . $search . '%');
             })
             ->orWhereHas('tags', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->where('name', 'LIKE', '%' . $search . '%')->skip(0)->take(2);
             });
     }
 }
