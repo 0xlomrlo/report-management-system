@@ -69,7 +69,7 @@ class Report extends Model
                 $query->where('name', 'LIKE', '%' . $search . '%');
             })
             ->orWhereHas('tags', function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%')->skip(0)->take(2);
+                $query->where('name', 'LIKE', '%' . $search . '%');
             });
     }
 }
