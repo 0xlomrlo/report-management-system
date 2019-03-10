@@ -140,9 +140,7 @@ class ReportController extends Controller
             $filesId = $request->get('dFiles');
             foreach ($filesId as $fileId) {
                 $file = ReportFile::find($fileId);
-                Storage::disk('local')->delete(
-                    'reports/' . $report->id . '/' . $file->name,
-                );
+                Storage::disk('local')->delete('reports/' . $report->id . '/' . $file->name);
                 $file->delete();
             }
         }
