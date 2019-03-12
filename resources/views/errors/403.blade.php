@@ -145,7 +145,7 @@
 				<h1>403</h1>
 			</div>
 			<h2>Access Forbidden</h2>
-			<p>Ensure you have sufficient permissions. <a href="/">Return to homepage</a></p>
+			<p>Ensure you have sufficient permissions. <a href="{{ route('redirect') }}">Return to homepage</a></p>
 		</div>
 	</div>
 

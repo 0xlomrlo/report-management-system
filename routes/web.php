@@ -8,9 +8,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 // Redirect
-Route::get('/', function () {
+Route::get('/',  ['as' => 'redirect', function () {
     return redirect('/reports');
-});
+}]);
 
 // Localization
 Route::get('locale/{locale}', function ($locale) {

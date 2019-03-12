@@ -145,7 +145,7 @@
 				<h1>404</h1>
 			</div>
 			<h2>Nothing was found</h2>
-			<p><a href="/">Return to homepage</a></p>
+			<p><a href="{{ route('redirect') }}">Return to homepage</a></p>
 		</div>
 	</div>
 
