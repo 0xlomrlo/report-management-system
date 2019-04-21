@@ -10,8 +10,6 @@
 
 <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
-
-
     <div class="row">
         <div class="container">
             <div class="card">
@@ -41,13 +39,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-
-    <div class="row">
-        <div class="col-lg-6 col-md-12">
+        <div class="container">
             <div class="card">
                 <div class="card-header card-header-info card-header-icon">
                     <div class="card-icon">
@@ -57,40 +49,19 @@
                 </div>
                 <div class="card-body">
                     <div class="container">
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-hover mb-0">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tags as $tag)
-                                    <tr>
-                                        <td>{{ ucfirst($tag->name) }}</td>
-                                        <td>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input class="form-check-input" type="checkbox" name="tags[]"
-                                                        value="{{ $tag->id }}">
-                                                    <span class="form-check-sign">
-                                                        <span class="check"></span>
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group bmd-form-group">
+                                    <label class="bmd-label-floating">@lang('layout.tags_label')</label>
+                                    <input type="text" name="tags" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-6 col-md-12">
+        <div class="container">
             <div class="card">
                 <div class="card-header card-header-info card-header-icon">
                     <div class="card-icon">
@@ -138,7 +109,8 @@
                     <div class="card-icon">
                         <i class="material-icons">cloud_upload</i>
                     </div>
-                    <h4 class="card-title">@lang('layout.upload_files') <small>(@lang('layout.upload_multiple_files'))</small></h4>
+                    <h4 class="card-title">@lang('layout.upload_files')
+                        <small>(@lang('layout.upload_multiple_files'))</small></h4>
                 </div>
                 <div class="card-body">
                     <div class="container">

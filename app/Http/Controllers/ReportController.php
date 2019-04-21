@@ -34,10 +34,9 @@ class ReportController extends Controller
 
     public function create(Request $request)
     {
-        $tags = Tag::all();
         $groups = $request->user()->groups;
 
-        return view('reports.create', compact('tags', 'groups'));
+        return view('reports.create', compact('groups'));
     }
 
     public function store(Request $request)
@@ -60,10 +59,11 @@ class ReportController extends Controller
             'group_id' => $request->get('group'),
             'user_id' => $request->user()->id,
         ];
+        $tags = array_filter(str_getcsv(str_replace(' ', '', $request->get('tags')), ','));
 
         $report = Report::create($input);
-        foreach ($request->get('tags') as $tag) {
-            $report->tags()->attach($tag);
+        foreach ($tags as $tag) {
+            $report->tags()->attach(Tag::firstOrCreate(['name' => ucfirst(strtolower($tag))]));
         }
         if ($request->hasFile('files')) {
             $files = $request->File('files');
@@ -101,10 +101,9 @@ class ReportController extends Controller
     public function edit(Request $request, $id)
     {
         $report = Report::with(['group', 'tags', 'user', 'files'])->findOrFail($id);
-        $tags = Tag::all();
         $groups = $request->user()->groups;
 
-        return view('reports/edit', compact('report', 'tags', 'groups'));
+        return view('reports/edit', compact('report', 'groups'));
     }
 
     public function update(Request $request, $id)
@@ -131,9 +130,10 @@ class ReportController extends Controller
         $report = Report::findOrFail($id);
         $report->update($input);
         $report->tags()->detach();
+        $tags = array_filter(str_getcsv(str_replace(' ', '', $request->get('tags')), ','));
 
-        foreach ($request->get('tags') as $tag) {
-            $report->tags()->attach($tag);
+        foreach ($tags as $tag) {
+            $report->tags()->attach(Tag::firstOrCreate(['name' => ucfirst(strtolower($tag))]));
         }
 
         if ($request->has('dFiles')) {

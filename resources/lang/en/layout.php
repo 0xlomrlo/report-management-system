@@ -25,6 +25,7 @@ return [
     'search_placeholder' => 'You can search by report name, content, tags, group, creator.',
     'group' => 'Group',
     'tags' => 'Tags',
+    'tags_label' => 'Type the tags of the report (Separate the tags with a comma). e.g. tag1, tag2',
     'show' => 'Show',
     'edit' => 'Edit',
     'delete' => 'Delete',
