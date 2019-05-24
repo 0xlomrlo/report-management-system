@@ -1,5 +1,3 @@
-﻿<p align="center"><img src="https://lomrlo.me/up/01.png"></p><br />
-
 
 
 ## Installation
